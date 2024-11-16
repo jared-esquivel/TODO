@@ -37,7 +37,6 @@ if (isset($_SESSION['name'])) {
 }
 
 
-
 // TODO: #3 Delete a task if a delete request is submitted.
 // (hint: check if the form $_POST['delete_id'] is set using `isset`. Then, to
 //        delete we use the `unset` function to remove the task from the session
@@ -76,6 +75,7 @@ function render_new_task($task, $id)
   echo "    <button type=\"submit\" class=\"mx-2 btn btn-link text-danger p-0\">clear</button>";
   echo "  </form>";
   echo " <hr/> ";
+
   echo "</div>";
 }
 
@@ -229,9 +229,50 @@ for ($i = 0; $i < count($_SESSION["tasks"]); $i++) {
 </head>
 
 <body>
-  <h1 class="m-2 p-1">
-    <?php echo $message; ?>
-  </h1>
+  <!-- TODO: #4 Create a form with a text input element and a button element. This form
+             will be resposible for submitting new tasks to be completed.
+       (hint: add the method="post" attribute to the form element. For the input element,
+              make sure to add the name="name" attribute since this is the name of the
+              task to be completed. Also add the type="text" attribute since this is a 
+              text input field.)
+       (hint: for the button, make sure to add the type="submit" attribute.)
+  -->
+
+  <form method="post">
+    <label for="taskName">New Task:</label>
+    <input type="text" id="taskName" name="name" placeholder="Enter task name" required>
+    <button type="submit">Add Task</button>
+  </form>
+
+  <?php
+  var_dump($_SESSION["tasks"]);
+
+
+  ?>
+
+
+  <!-- TODO: #5 We want to iterate through each of our tasks and render them. If there are
+             no tasks to be rendered, then we display a message to notify the user.
+       (hint: use a foreach loop over the tasks array $_SESSION['tasks'], calling the
+              `render_new_task` function at each iteration. Use the index of the task
+              as the $id when calling the `render_new_task` function.)
+       (hint: use the `empty` function on the $_SESSION['tasks'] to check if there are any
+              tasks in the array. If there are no tasks, then display a message to notify
+              the user.)
+  -->
+
+  <?php
+  if (empty($_SESSION["tasks"])) {
+
+    echo "There is NOTHING HERE";
+  }
+
+  for ($i = 0; $i < count($_SESSION["tasks"]); $i++) {
+
+    render_new_task($_SESSION["tasks"][$i], $i);
+  }
+
+  ?>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
