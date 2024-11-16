@@ -27,6 +27,16 @@ if (!empty($_POST['name'])) {
   redirect_and_suspend();
 }
 
+$message = "Hello, world!";
+
+if (isset($_POST['name'])) {
+  $_SESSION['name'] = htmlspecialchars($_POST['name']);
+}
+if (isset($_SESSION['name'])) {
+  echo "<h2>Welcome back, " . $_SESSION['name'] . "!</h2>";
+}
+
+
 
 // TODO: #3 Delete a task if a delete request is submitted.
 // (hint: check if the form $_POST['delete_id'] is set using `isset`. Then, to
@@ -76,26 +86,24 @@ function redirect_and_suspend()
   // Ensures that the redirect happens by terminating the script.
   exit();
 }
-
-$message = "Hello, world!";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Project</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous" />
-  <link rel="stylesheet" href="styles/stylesheet.css" />
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Project</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles/stylesheet.css" />
+  </head>
 
-<>
+
   <!-- TODO: #4 Create a form with a text input element and a button element. This form
              will be resposible for submitting new tasks to be completed.
        (hint: add the method="post" attribute to the form element. For the input element,
@@ -175,4 +183,30 @@ $message = "Hello, world!";
   </script>
   </body>
 
-</html>
+  </div>
+  <!---- welcome name and date  -->
+  <div class="btn-group">
+    <button>
+      <label for="name">Welcome:</label>
+    </button>
+    <button>
+      <?php
+      $d = mktime(17, 20, 54, 11, 15, 2024);
+      echo "The Time is  " . date("Y-m-d h:i:sa", $d);
+      ?>
+    </button>
+  </div>
+
+  <!---- task buttons -->
+  <div class="btn-group">
+    <button>
+      <h1> Task:###### </h1>
+    </button>
+    <button>
+      <H1> New Task</H1>
+    </button>
+
+
+  </div>
+
+  </html>
