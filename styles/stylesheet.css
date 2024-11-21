@@ -1,3 +1,17 @@
 .D {
   border: 1px solid red;
 }
+
+#New-task-bar {
+  display: flexbox;
+  margin-top: 15rem;
+  margin-left: 26rem;
+  padding-left: 6rem;
+  padding-top: 6rem;
+}
+
+.task {
+  display: flexbox;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}

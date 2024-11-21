@@ -63,8 +63,9 @@ function render_new_task($task, $id)
   // the delete button itself to remove a task from the list.
   echo "  <form method=\"post\" style=\"display:inline;\">";
   echo "    <input type=\"hidden\" name=\"delete_id\" value=\"$id\">";
-  echo "    <button type=\"submit\" class=\"mx-2 btn btn-link text-warning p-0\">clear</button>";
+  echo "    <button type=\"submit\" class=\"mx-2 btn btn-link text-danger p-0\">clear</button>";
   echo "  </form>";
+  echo " <hr/> ";
   echo "</div>";
 }
 
@@ -94,7 +95,7 @@ $message = "Hello, world!";
   <link rel="stylesheet" href="styles/stylesheet.css" />
 </head>
 
-<body>
+<>
   <!-- TODO: #4 Create a form with a text input element and a button element. This form
              will be resposible for submitting new tasks to be completed.
        (hint: add the method="post" attribute to the form element. For the input element,
@@ -104,17 +105,45 @@ $message = "Hello, world!";
        (hint: for the button, make sure to add the type="submit" attribute.)
   -->
 
-  <form method="post">
-    <label for="taskName">New Task:</label>
-    <input type="text" id="taskName" name="name" placeholder="Enter task name" required>
-    <button type="submit">Add Task</button>
-  </form>
 
-  <?php
-  var_dump($_SESSION["tasks"]);
+  <div
+    class="alert alert-info alert-dismissible fade show text-center"
+    role="alert"
+    id="donation-banner">
+    "Unlock exclusive features and enhance your experience with our premium plan—get all the benefits for a limited-time low price!"
+
+    <button
+      type="button"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
 
-  ?>
+
+
+
+
+  <div id="New-task-bar">
+
+
+
+
+
+    <form method="post">
+      <label for="taskName">New Task:</label>
+      <input type="text" id="taskName" name="name" placeholder="Enter task name" required>
+      <button class="btn btn-secondary type=" submit">Add Task</button>
+    </form>
+
+
+  </div>
+
+
+
+
 
 
   <!-- TODO: #5 We want to iterate through each of our tasks and render them. If there are
@@ -144,6 +173,6 @@ $message = "Hello, world!";
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous">
   </script>
-</body>
+  </body>
 
 </html>
