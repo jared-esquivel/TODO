@@ -1,3 +1,24 @@
-.D {
-  border: 1px solid red;
+*,
+*::before *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid purple;
+  padding: 10px;
+}
+.center {
+  text-align: center;
+  border: 3px solid purple;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border: 3px solid purple;
 }
