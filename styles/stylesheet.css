@@ -25,10 +25,10 @@
 
 #New-task-bar {
   display: flexbox;
-  margin-top: 15rem;
+  margin-top: 1rem;
   margin-left: 26rem;
   padding-left: 6rem;
-  padding-top: 6rem;
+  padding-top: 5rem;
 }
 
 .task {
