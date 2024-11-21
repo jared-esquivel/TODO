@@ -89,22 +89,22 @@ function redirect_and_suspend()
 ?>
 
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Project</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous" />
-    <link rel="stylesheet" href="styles/stylesheet.css" />
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Save Name</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles/stylesheet.css" />
+</head>
 
 
-  <!-- TODO: #4 Create a form with a text input element and a button element. This form
+<!-- TODO: #4 Create a form with a text input element and a button element. This form
              will be resposible for submitting new tasks to be completed.
        (hint: add the method="post" attribute to the form element. For the input element,
               make sure to add the name="name" attribute since this is the name of the
@@ -114,47 +114,47 @@ function redirect_and_suspend()
   -->
 
 
-  <div
-    class="alert alert-info alert-dismissible fade show text-center"
-    role="alert"
-    id="donation-banner">
-    "Unlock exclusive features and enhance your experience with our premium plan—get all the benefits for a limited-time low price!"
+<div
+  class="alert alert-info alert-dismissible fade show text-center"
+  role="alert"
+  id="donation-banner">
+  "Unlock exclusive features and enhance your experience with our premium plan—get all the benefits for a limited-time low price!"
 
-    <button
-      type="button"
-      class="close"
-      data-dismiss="alert"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-
-
-
-
-
-  <div id="New-task-bar">
-
-
-
-
-
-    <form method="post">
-      <label for="taskName">New Task:</label>
-      <input type="text" id="taskName" name="name" placeholder="Enter task name" required>
-      <button class="btn btn-secondary type=" submit">Add Task</button>
-    </form>
-
-
-  </div>
+  <button
+    type="button"
+    class="close"
+    data-dismiss="alert"
+    aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
 
 
 
 
 
-  <!-- TODO: #5 We want to iterate through each of our tasks and render them. If there are
+<div id="New-task-bar">
+
+
+
+
+
+  <form method="post">
+    <label for="taskName">New Task:</label>
+    <input type="text" id="taskName" name="name" placeholder="Enter task name" required>
+    <button class="btn btn-secondary type=" submit">Add Task</button>
+  </form>
+
+
+</div>
+
+
+
+
+
+
+<!-- TODO: #5 We want to iterate through each of our tasks and render them. If there are
              no tasks to be rendered, then we display a message to notify the user.
        (hint: use a foreach loop over the tasks array $_SESSION['tasks'], calling the
               `render_new_task` function at each iteration. Use the index of the task
@@ -164,49 +164,86 @@ function redirect_and_suspend()
               the user.)
   -->
 
+<?php
+if (empty($_SESSION["tasks"])) {
+
+  echo "There is NOTHING HERE";
+}
+
+for ($i = 0; $i < count($_SESSION["tasks"]); $i++) {
+
+  render_new_task($_SESSION["tasks"][$i], $i);
+}
+
+?>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous">
+</script>
+</body>
+
+<body>
+  <div class="center">
+    <!-- Form for entering the name -->
+    <form method="POST">
+      <label for="name">Enter your name:</label>
+      <input type="text" name="name" id="name" required>
+      <button type="submit">Save Name</button>
+    </form>
+  </div>
   <?php
-  if (empty($_SESSION["tasks"])) {
-
-    echo "There is NOTHING HERE";
+  // Check if form is submitted and save the name in session
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['name'])) {
+    // Save the name in session
+    $_SESSION['name'] = $_POST['name'];
   }
-
-  for ($i = 0; $i < count($_SESSION["tasks"]); $i++) {
-
-    render_new_task($_SESSION["tasks"][$i], $i);
-  }
-
   ?>
+
+  <!-- Display the saved name after refresh -->
+  <?php if (isset($_SESSION['name'])): ?>
+    <h2>Hello, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
+  <?php endif; ?>
+
+</body>
+
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Project</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles/stylesheet.css" />
+</head>
+
+<body>
+  <h1 class="m-2 p-1">
+    <?php echo $message; ?>
+  </h1>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous">
   </script>
-  </body>
-
-  </div>
-  <!---- welcome name and date  -->
-  <div class="btn-group">
-    <button>
-      <label for="name">Welcome:</label>
-    </button>
-    <button>
-      <?php
-      $d = mktime(17, 20, 54, 11, 15, 2024);
-      echo "The Time is  " . date("Y-m-d h:i:sa", $d);
-      ?>
-    </button>
-  </div>
-
-  <!---- task buttons -->
-  <div class="btn-group">
-    <button>
-      <h1> Task:###### </h1>
-    </button>
-    <button>
-      <H1> New Task</H1>
-    </button>
-
-
-  </div>
+  <!DOCTYPE html>
+  <html lang="en">
 
   </html>
+</body>
+<!---------------->
+
+
+
+</html>
