@@ -22,3 +22,17 @@
   height: 50px;
   border: 3px solid purple;
 }
+
+#New-task-bar {
+  display: flexbox;
+  margin-top: 1rem;
+  margin-left: 26rem;
+  padding-left: 6rem;
+  padding-top: 5rem;
+}
+
+.task {
+  display: flexbox;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
