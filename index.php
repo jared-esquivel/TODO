@@ -30,9 +30,6 @@ if (isset($_POST["delete_id"])) {
   redirect_and_suspend();
 }
 
-
-
-
 function render_new_task($task, $id)
 {
   echo "<div class=\"task\" id=\"task-$id\">";
@@ -54,35 +51,41 @@ function redirect_and_suspend()
   // Ensures that the redirect happens by terminating the script.
   exit();
 }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Save Name</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous" />
-  <link rel="stylesheet" href="styles/stylesheet.css" />
 </head>
 
+<body>
+  <div class="center">
+    <!-- Form for entering the name -->
+    <form method="POST">
+      <label for="name">Enter your name:</label>
+      <input type="text" name="name" id="name" required>
+      <button type="submit">Save Name</button>
+    </form>
+  </div>
+  <?php
+  // Check if form is submitted and save the name in session
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['name'])) {
+    // Save the name in session
+    $_SESSION['name'] = $_POST['name'];
+  }
+  ?>
 
-<!-- TODO: #4 Create a form with a text input element and a button element. This form
-             will be resposible for submitting new tasks to be completed.
-       (hint: add the method="post" attribute to the form element. For the input element,
-              make sure to add the name="name" attribute since this is the name of the
-              task to be completed. Also add the type="text" attribute since this is a 
-              text input field.)
-       (hint: for the button, make sure to add the type="submit" attribute.)
-  -->
+  <!-- Display the saved name after refresh -->
+  <?php if (isset($_SESSION['name'])): ?>
+    <h2>Hello, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
+  <?php endif; ?>
 
-
-<div
+  <div
   class="alert alert-info alert-dismissible fade show text-center"
   role="alert"
   id="donation-banner">
@@ -97,7 +100,6 @@ function redirect_and_suspend()
   </button>
 </div>
 
-<body>
   <div class="center">
     <!-- Form for entering the name -->
     <form method="POST">
@@ -116,18 +118,6 @@ function redirect_and_suspend()
       <button class="btn btn-secondary type=" submit">Add Task</button>
     </form>
   </div>
-
-
-  <!-- TODO: #5 We want to iterate through each of our tasks and render them. If there are
-             no tasks to be rendered, then we display a message to notify the user.
-       (hint: use a foreach loop over the tasks array $_SESSION['tasks'], calling the
-              `render_new_task` function at each iteration. Use the index of the task
-              as the $id when calling the `render_new_task` function.)
-       (hint: use the `empty` function on the $_SESSION['tasks'] to check if there are any
-              tasks in the array. If there are no tasks, then display a message to notify
-              the user.)
-  -->
-
   <?php
   if (empty($_SESSION["tasks"])) {
 
@@ -146,9 +136,6 @@ function redirect_and_suspend()
     crossorigin="anonymous">
   </script>
 
-
-
-
   <?php
   // Check if form is submitted and save the name in session
   if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['name'])) {
@@ -161,7 +148,6 @@ function redirect_and_suspend()
   <?php if (isset($_SESSION['name'])): ?>
     <h2>Hello, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
   <?php endif; ?>
-
+  
 </body>
-
 </html>
