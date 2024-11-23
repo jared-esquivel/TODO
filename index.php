@@ -23,7 +23,7 @@ if (isset($_POST["delete_id"])) {
   $delete_id = $_POST['delete_id'];
   unset($_SESSION['tasks'][$delete_id]);
 
-  $_SESSION["tasks"] = array_values(array: $_SESSION["tasks"]);
+  $_SESSION["tasks"] = array_values($_SESSION["tasks"]);
 
   redirect_and_suspend();
 }

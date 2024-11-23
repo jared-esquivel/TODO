@@ -36,3 +36,11 @@
   margin-left: 10rem;
   margin-right: 10rem;
 }
+
+body {
+  background-image: url("/assets/images/taco.jpeg");
+  height: 100vh;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
