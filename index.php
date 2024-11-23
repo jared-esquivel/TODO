@@ -9,15 +9,13 @@ if (!isset($_SESSION["tasks"])) {
 if (!empty($_POST['name'])) {
 
   $_SESSION["tasks"][] = $_POST["name"];
-
   redirect_and_suspend();
 }
 
-if (isset($_POST['name'])) {
-  $_SESSION['name'] = htmlspecialchars($_POST['name']);
-}
-if (isset($_SESSION['name'])) {
-  echo "<h2>Welcome back, " . $_SESSION['name'] . "!</h2>";
+if (!empty($_POST['user-name'])) {
+
+  $_SESSION["user-name"] = $_POST["user-name"];
+  redirect_and_suspend();
 }
 
 if (isset($_POST["delete_id"])) {
@@ -61,6 +59,9 @@ function redirect_and_suspend()
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Save Name</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/stylesheet.css">
 </head>
 
 <body>
@@ -68,86 +69,55 @@ function redirect_and_suspend()
     <!-- Form for entering the name -->
     <form method="POST">
       <label for="name">Enter your name:</label>
-      <input type="text" name="name" id="name" required>
+      <input type="text" name="user-name" id="user-name">
       <button type="submit">Save Name</button>
     </form>
   </div>
+  <div
+    class="alert alert-info alert-dismissible fade show text-center"
+    role="alert"
+    id="donation-banner">
+    "Unlock exclusive features and enhance your experience with our premium plan—get all the benefits for a limited-time low price!"
+
+    <button
+      type="button"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <?php
-  // Check if form is submitted and save the name in session
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['name'])) {
-    // Save the name in session
-    $_SESSION['name'] = $_POST['name'];
+  if (isset($_SESSION["user-name"])) {
+    $user_name = $_SESSION["user-name"];
+    echo "<h1>Welcome, $user_name</h1>";
   }
   ?>
 
-  <!-- Display the saved name after refresh -->
-  <?php if (isset($_SESSION['name'])): ?>
-    <h2>Hello, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
-  <?php endif; ?>
-
-  <div
-  class="alert alert-info alert-dismissible fade show text-center"
-  role="alert"
-  id="donation-banner">
-  "Unlock exclusive features and enhance your experience with our premium plan—get all the benefits for a limited-time low price!"
-
-  <button
-    type="button"
-    class="close"
-    data-dismiss="alert"
-    aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-  <div class="center">
-    <!-- Form for entering the name -->
-    <form method="POST">
-      <label for="name">Enter your name:</label>
-      <input type="text" name="name" id="name" required>
-      <button type="submit">Save Name</button>
-    </form>
-  </div>
-
-
   <div id="New-task-bar">
-
     <form method="post">
       <label for="taskName">New Task:</label>
       <input type="text" id="taskName" name="name" placeholder="Enter task name" required>
-      <button class="btn btn-secondary type=" submit">Add Task</button>
+      <button class="btn btn-secondary" type="submit">Add Task</button>
     </form>
   </div>
+
   <?php
   if (empty($_SESSION["tasks"])) {
-
     echo "There is NOTHING HERE";
   }
 
   for ($i = 0; $i < count($_SESSION["tasks"]); $i++) {
-
     render_new_task($_SESSION["tasks"][$i], $i);
   }
-
   ?>
+
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous">
   </script>
-
-  <?php
-  // Check if form is submitted and save the name in session
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['name'])) {
-    // Save the name in session
-    $_SESSION['name'] = $_POST['name'];
-  }
-  ?>
-
-  <!-- Display the saved name after refresh -->
-  <?php if (isset($_SESSION['name'])): ?>
-    <h2>Hello, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
-  <?php endif; ?>
-  
 </body>
+
 </html>
