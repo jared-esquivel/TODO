@@ -36,7 +36,7 @@ function render_new_task($task, $id)
   // the delete button itself to remove a task from the list.
   echo "  <form method=\"post\" style=\"display:inline;\">";
   echo "    <input type=\"hidden\" name=\"delete_id\" value=\"$id\">";
-  echo "    <button type=\"submit\" class=\"mx-2 btn btn-link text-danger p-0\">clear</button>";
+  echo "    <button type=\"submit\" class=\"mx-2 btn btn-link text-white p-0\">clear</button>";
   echo "  </form>";
   echo " <hr/> ";
   echo "</div>";
